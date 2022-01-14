@@ -20,7 +20,7 @@
 //   }
 // }
 // //MARK : 홈화면
-// //홈 화면 내에 뭔가 데이터를 받거나 터치했을때 모양이 변하거나 상태가 변하는 동적인 요소가 있다면
+// //홈 화면 내에 뭔가 데이터를 받거나 터치했을때 모양이 변하거나 상태가 변하는 동적인 요소가 있다면 
 // //Stlessful 위젯을 사용해야합니다.
 // class Grade extends StatelessWidget {
 
@@ -49,7 +49,7 @@
 //             ],
 //             mainAxisAlignment: MainAxisAlignment.center,
 //             ),
-
+           
 //             Divider( // 구분선
 //               height: 60.0,
 //               color: Colors.grey[850],
@@ -58,7 +58,7 @@
 //             ),
 //             Text('Name', style: TextStyle(
 //               color: Colors.white,
-//               letterSpacing: 2.0, //철자간의 간격
+//               letterSpacing: 2.0, //철자간의 간격 
 //             ),
 //             ),
 //             SizedBox(height: 10.0,),//간격 추가
@@ -122,7 +122,7 @@
 //               backgroundImage: AssetImage('2.png'),
 //               radius: 40.0,
 //               //앱 자체가 png로 배경이 없을 경우 색깔을 지정해주어 일체감을 줄수 있습니다
-//               backgroundColor: Colors.amber[800],
+//               backgroundColor: Colors.amber[800], 
 //             ),
 //             ),
 //             SizedBox(width: 30,)
@@ -130,6 +130,8 @@
 //             ],
 //             mainAxisAlignment: MainAxisAlignment.center,
 //             ),
+           
+
 
 //           ],
 //         ),
@@ -139,150 +141,169 @@
 // }
 
 import 'package:flutter/material.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 
 void main() => runApp(MyApp());
 
 class MyApp extends StatelessWidget {
-  const MyApp({Key? key}) : super(key: key);
+  const MyApp({ Key? key }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
       title: '플러터 배우기2',
-      theme: ThemeData(primarySwatch: Colors.red),
+      theme: ThemeData(
+        primarySwatch: Colors.red
+      ),
       home: MyHomePage(),
       debugShowCheckedModeBanner: false,
     );
   }
 }
 
-class MyHomePage extends StatelessWidget {
-  const MyHomePage({Key? key}) : super(key: key);
+ class MyHomePage extends StatelessWidget {
+   const MyHomePage({ Key? key }) : super(key: key);
+ 
+   @override
+   Widget build(BuildContext context) {
+     return Scaffold(
+       appBar: AppBar(
+         title: Text('플러터 배우기'),
+         elevation: 0.0,
+         actions: [
+           IconButton(icon: Icon(Icons.shop), onPressed: () {print('shop');}),
+           IconButton(icon: Icon(Icons.star), onPressed: () {print('star');}),
+           IconButton(icon: Icon(Icons.favorite), onPressed: () {print('favorite');})
+         ],
+         
+         ),//간단한 위젯이나 아이콘을 왼쪽에 위치 시킵니다.
+         drawer: Drawer(
+           child: ListView(// 테이블 뷰랑 비슷한거 같다. ListView == tableView, ListTile == tableViewCell
+           padding: EdgeInsets.zero,
+           children: [
+             UserAccountsDrawerHeader(
+               currentAccountPicture: CircleAvatar(
+               backgroundImage: AssetImage('1.png'),  
+               backgroundColor: Colors.white,
+               ),
+               //@required 필수 요소
+               accountName: Text('드로월 메뉴'),
+               accountEmail: Text("jdr4343@naver.com"),
+               onDetailsPressed: (){print('화면을 내립니다');},//추가로 뭔가 더 펼쳐지는 메뉴기능
+               decoration: BoxDecoration(
+                 color: Colors.red[200],
+                 borderRadius: BorderRadius.only(
+                   bottomLeft: Radius.circular(40.0),
+                   bottomRight: Radius.circular(40.0)
+                 )
+               ),//화면꾸미기
+               otherAccountsPictures: [//한개 이상의 다른계정 이미지를 추가 할수 있습니다.
+               CircleAvatar(
+                 backgroundImage: AssetImage('2.png'),
+                 backgroundColor: Colors.white,
+               ),
+              // CircleAvatar(
+              //    backgroundImage: AssetImage('2.png'),
+              //    backgroundColor: Colors.white,
+              //  ),
+            
+               ],
+               ),
+               ListTile(
+                 leading: Icon(Icons.home, color: Colors.grey[850],),
+                 title: Text('Home'),
+                 onTap: (){print('홈이 클릭되었습니다.');},
+                 trailing: IconButton(icon: Icon(Icons.add), onPressed: (){print('object');},)
+               ),
+               ListTile(
+                 leading: Icon(Icons.settings, color: Colors.grey[850],),
+                 title: Text('Settings'),
+                 onTap: (){print('세팅이 클릭되었습니다.');},
+                 trailing: IconButton(icon: Icon(Icons.add), onPressed: (){print('object');},)
+               ),
+               ListTile(
+                 leading: Icon(Icons.question_answer, color: Colors.grey[850],),
+                 title: Text('Q&A'),
+                 onTap: (){print('홈이 클릭되었습니다.');},
+                 trailing: IconButton(icon: Icon(Icons.add), onPressed: (){print('object');},)
+               ), 
+            ],
+           ),
+         ),
+        //  body: Center(
+        //    child: TextButton(
+          
+        //      child: Text('스낵바'),
+        //      style: ButtonStyle(
+        //        textStyle: MaterialStateProperty.all(TextStyle(fontSize: 14),
+        //      ),
+        //     backgroundColor: MaterialStateProperty.all(Colors.teal),
+        //     foregroundColor: MaterialStateProperty.all(Colors.white)
+        //      ),
+        //     onPressed: (){
+        //       ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text('안녕')));
+        //       },
+        //    ),
+        //   )
+        body: MyToastMessnger(),
+         );
+       
+   }
+ }
+//스낵바
+class MySnackBar extends StatelessWidget {
+  const MySnackBar({ Key? key }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-        appBar: AppBar(
-          title: Text('플러터 배우기'),
-          elevation: 0.0,
-          actions: [
-            IconButton(
-                icon: Icon(Icons.shop),
-                onPressed: () {
-                  print('shop');
-                }),
-            IconButton(
-                icon: Icon(Icons.star),
-                onPressed: () {
-                  print('star');
-                }),
-            IconButton(
-                icon: Icon(Icons.favorite),
-                onPressed: () {
-                  print('favorite');
-                })
-          ],
-        ), //간단한 위젯이나 아이콘을 왼쪽에 위치 시킵니다.
-        drawer: Drawer(
-          child: ListView(
-            // 테이블 뷰랑 비슷한거 같다. ListView == tableView, ListTile == tableViewCell
-            padding: EdgeInsets.zero,
-            children: [
-              UserAccountsDrawerHeader(
-                currentAccountPicture: CircleAvatar(
-                  backgroundImage: AssetImage('1.png'),
-                  backgroundColor: Colors.white,
-                ),
-                //@required 필수 요소
-                accountName: Text('드로월 메뉴'),
-                accountEmail: Text("jdr4343@naver.com"),
-                onDetailsPressed: () {
-                  print('화면을 내립니다');
-                }, //추가로 뭔가 더 펼쳐지는 메뉴기능
-                decoration: BoxDecoration(
-                    color: Colors.red[200],
-                    borderRadius: BorderRadius.only(
-                        bottomLeft: Radius.circular(40.0),
-                        bottomRight: Radius.circular(40.0))), //화면꾸미기
-                otherAccountsPictures: [
-                  //한개 이상의 다른계정 이미지를 추가 할수 있습니다.
-                  CircleAvatar(
-                    backgroundImage: AssetImage('2.png'),
-                    backgroundColor: Colors.white,
-                  ),
-                  // CircleAvatar(
-                  //    backgroundImage: AssetImage('2.png'),
-                  //    backgroundColor: Colors.white,
-                  //  ),
-                ],
+    return Center(
+      child: TextButton(
+        child: Text('Show me'),
+        onPressed: (){
+          ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+            content: Text(
+              'hello', 
+              textAlign: TextAlign.center, 
+              style: TextStyle(
+                color: Colors.white,
+                backgroundColor: Colors.deepOrange
               ),
-              ListTile(
-                  leading: Icon(
-                    Icons.home,
-                    color: Colors.grey[850],
-                  ),
-                  title: Text('Home'),
-                  onTap: () {
-                    print('홈이 클릭되었습니다.');
-                  },
-                  trailing: IconButton(
-                    icon: Icon(Icons.add),
-                    onPressed: () {
-                      print('object');
-                    },
-                  )),
-              ListTile(
-                  leading: Icon(
-                    Icons.settings,
-                    color: Colors.grey[850],
-                  ),
-                  title: Text('Settings'),
-                  onTap: () {
-                    print('세팅이 클릭되었습니다.');
-                  },
-                  trailing: IconButton(
-                    icon: Icon(Icons.add),
-                    onPressed: () {
-                      print('object');
-                    },
-                  )),
-              ListTile(
-                  leading: Icon(
-                    Icons.question_answer,
-                    color: Colors.grey[850],
-                  ),
-                  title: Text('Q&A'),
-                  onTap: () {
-                    print('홈이 클릭되었습니다.');
-                  },
-                  trailing: IconButton(
-                    icon: Icon(Icons.add),
-                    onPressed: () {
-                      print('object');
-                    },
-                  )),
-            ],
-          ),
-        ),
-        body: Builder(
-          //바디에서 곧바로 센터 위젯을 불러오지 않고 빌더함수네에서 센터 위젯을 리턴
-          builder: (BuildContext ctx) {
-            return Center(
-              child: TextButton(
-                child: Text('스낵바'),
-                style: ButtonStyle(
-                    textStyle: MaterialStateProperty.all(
-                      TextStyle(fontSize: 14),
-                    ),
-                    backgroundColor: MaterialStateProperty.all(Colors.teal),
-                    foregroundColor: MaterialStateProperty.all(Colors.white)),
-                onPressed: () {
-                  ScaffoldMessenger.of(ctx)
-                      .showSnackBar(SnackBar(content: Text('안녕')));
-                },
-              ),
-            );
-          },
-        ));
+            ),
+            duration: Duration(milliseconds: 1000),
+            )
+          );
+        },
+      )
+    );
   }
+}
+//토스트 메시지
+//사용하기에 앞서 라이브러리를 등록 해야합니다. Yami 파일에서 등록합니다.
+class MyToastMessnger extends StatelessWidget {
+  const MyToastMessnger({ Key? key }) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return Center(
+      child: TextButton(
+        child: Text('Toast'),
+        style: ButtonStyle(
+          backgroundColor: MaterialStateProperty.all(Colors.blue)
+        ),
+        onPressed: (){flutterToast();},
+      )
+    );
+  }
+}
+
+void flutterToast(){
+  Fluttertoast.showToast(
+    msg: 'flutter',
+    gravity: ToastGravity.BOTTOM, //토스트 메시지의 위치
+    backgroundColor: Colors.redAccent,
+    fontSize: 20.0,
+    textColor: Colors.white,
+    toastLength: Toast.LENGTH_LONG
+
+  );
 }
