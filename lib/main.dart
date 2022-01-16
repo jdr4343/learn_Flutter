@@ -245,12 +245,12 @@ class MyApp extends StatelessWidget {
         //       },
         //    ),
         //   )
-        body: MyToastMessnger(),
+        body: NavigatorTutorial(),
          );
        
    }
  }
-//스낵바
+//MARK : SnackBar
 class MySnackBar extends StatelessWidget {
   const MySnackBar({ Key? key }) : super(key: key);
 
@@ -277,7 +277,7 @@ class MySnackBar extends StatelessWidget {
     );
   }
 }
-//토스트 메시지
+//MARK : Toast
 //사용하기에 앞서 라이브러리를 등록 해야합니다. Yami 파일에서 등록합니다.
 class MyToastMessnger extends StatelessWidget {
   const MyToastMessnger({ Key? key }) : super(key: key);
@@ -306,4 +306,107 @@ void flutterToast(){
     toastLength: Toast.LENGTH_LONG
 
   );
+}
+//MARK : Container
+class ContainerWidget extends StatelessWidget {
+  const ContainerWidget({ Key? key }) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      body: SafeArea(
+        child: Container(
+          color: Colors.red,
+          child: Text('dd'),
+          width: 100,
+          height: 100,
+          margin: EdgeInsets.symmetric(
+            vertical: 50,
+            horizontal: 10
+          ),
+          padding: EdgeInsets.all(20),
+        ),
+      )
+
+    );
+  }
+}
+
+//MARK : Column & Row 세로 & 가로
+class ColumnRowWidget extends StatelessWidget {
+  const ColumnRowWidget({ Key? key }) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      body: SafeArea(
+        child: Center(
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+            children: [
+             Container(
+               width: 100,
+               height: 100,
+               color: Colors.red,
+               child: Text('Container 1')
+             ),
+             Container(
+               width: 100,
+               height: 100,
+               color: Colors.blue,
+               child: Text('Container 2')
+             ),
+             Container(
+               width: 100,
+               height: 100,
+               color: Colors.green,
+               child: Text('Container 3')
+             ),
+            ],
+          ),
+        ),
+      ),
+      
+    );
+  }
+}
+
+//MARK : Navigator
+class NavigatorTutorial extends StatelessWidget {
+  const NavigatorTutorial({ Key? key }) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+     body: Center(
+       child: TextButton(
+         child: Text('Go to Second Page'),
+         onPressed: (){
+           Navigator.push(context, MaterialPageRoute(builder: (context) => SecondPage()));
+         },
+       ),
+       )
+    );
+  }
+}
+
+class SecondPage extends StatelessWidget {
+  const SecondPage({ Key? key }) : super(key: key);
+
+  @override
+  Widget build(BuildContext ctx) {
+    return Scaffold(
+      appBar: AppBar(
+        title: Text('Second Page'),
+      ),
+     body: Center(
+       child: TextButton(
+         child: Text('Go to Fitst Page'),
+         onPressed: (){
+           Navigator.pop(ctx);
+         },
+       ),
+       )
+    );
+  }
 }
