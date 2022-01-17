@@ -142,7 +142,9 @@
 
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
-
+import 'package:learn_flutter/ScreenA.dart';
+import 'package:learn_flutter/ScreenB.dart';
+import 'package:learn_flutter/ScreenC.dart';
 void main() => runApp(MyApp());
 
 class MyApp extends StatelessWidget {
@@ -151,11 +153,17 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: '플러터 배우기2',
+      title: '플러터 배우기',
       theme: ThemeData(
         primarySwatch: Colors.red
       ),
-      home: MyHomePage(),
+      initialRoute: '/',
+      //맵 자료를 나열합니다. Key 값인 '/' 불려지면 value 값인 ScreenA 위젯을 부릅니다.
+      routes: {
+        '/' : (context) => ScreenA(),
+        '/b' : (context) => ScreenB(),
+        '/c' : (context) => ScreenC(),
+      },
       debugShowCheckedModeBanner: false,
     );
   }
@@ -382,7 +390,7 @@ class NavigatorTutorial extends StatelessWidget {
        child: TextButton(
          child: Text('Go to Second Page'),
          onPressed: (){
-           Navigator.push(context, MaterialPageRoute(builder: (context) => SecondPage()));
+           Navigator.push(context, MaterialPageRoute(builder: (_) => SecondPage()));
          },
        ),
        )
