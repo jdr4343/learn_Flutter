@@ -142,9 +142,11 @@
 
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
-import 'package:learn_flutter/ScreenA.dart';
-import 'package:learn_flutter/ScreenB.dart';
-import 'package:learn_flutter/ScreenC.dart';
+import 'package:learn_flutter/source/random_Englishwords.dart';
+import 'trash/ScreenA.dart';
+import 'trash/ScreenB.dart';
+import 'trash/ScreenC.dart';
+import 'source/random_Englishwords.dart';
 void main() => runApp(MyApp());
 
 class MyApp extends StatelessWidget {
@@ -157,13 +159,14 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         primarySwatch: Colors.red
       ),
-      initialRoute: '/',
-      //맵 자료를 나열합니다. Key 값인 '/' 불려지면 value 값인 ScreenA 위젯을 부릅니다.
-      routes: {
-        '/' : (context) => ScreenA(),
-        '/b' : (context) => ScreenB(),
-        '/c' : (context) => ScreenC(),
-      },
+      home: RandomList(),
+      // initialRoute: '/',
+      // //맵 자료를 나열합니다. Key 값인 '/' 불려지면 value 값인 ScreenA 위젯을 부릅니다.
+      // routes: {
+      //   '/' : (context) => ScreenA(),
+      //   '/b' : (context) => ScreenB(),
+      //   '/c' : (context) => ScreenC(),
+      // },
       debugShowCheckedModeBanner: false,
     );
   }
@@ -418,3 +421,4 @@ class SecondPage extends StatelessWidget {
     );
   }
 }
+
