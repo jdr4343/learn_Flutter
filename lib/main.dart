@@ -147,6 +147,7 @@ import 'trash/ScreenA.dart';
 import 'trash/ScreenB.dart';
 import 'trash/ScreenC.dart';
 import 'source/random_Englishwords.dart';
+import 'AnimationList/Animation_List.dart';
 void main() => runApp(MyApp());
 
 class MyApp extends StatelessWidget {
@@ -157,9 +158,9 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       title: '플러터 배우기',
       theme: ThemeData(
-        primarySwatch: Colors.red
+       // primarySwatch: Colors.red
       ),
-      home: RandomList(),
+      home: AnimationList(),
       // initialRoute: '/',
       // //맵 자료를 나열합니다. Key 값인 '/' 불려지면 value 값인 ScreenA 위젯을 부릅니다.
       // routes: {
