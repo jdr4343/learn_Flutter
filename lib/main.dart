@@ -158,7 +158,7 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       title: '플러터 배우기',
       theme: ThemeData(
-       // primarySwatch: Colors.red
+        primarySwatch: Colors.amber
       ),
       home: AnimationList(),
       // initialRoute: '/',
